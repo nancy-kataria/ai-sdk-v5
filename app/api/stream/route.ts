@@ -10,6 +10,15 @@ export async function POST(req: Request){
       prompt,
     });
 
+    // tracing token usage
+    result.usage.then((usage) => {
+        console.log({
+            inputTokens: usage.inputTokens,
+            outputTokens: usage.outputTokens,
+            totalTokens: usage.totalTokens
+        })
+    })
+
     return result.toUIMessageStreamResponse();
   } catch (error) {
     console.error(error);
